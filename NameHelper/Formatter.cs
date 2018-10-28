@@ -10,10 +10,12 @@ namespace NameHelper
     public class Formatter
     {
         private readonly IReadOnlyCollection<IFormatRule> _rules;
+        private TextInfo _textInfo;
 
         public Formatter(IReadOnlyCollection<IFormatRule> rules)
         {
             _rules = rules ?? throw new ArgumentNullException(nameof(rules));
+            _textInfo = CultureInfo.CurrentCulture.TextInfo;
         }
 
         private string _applyRules(string arg)
@@ -30,10 +32,14 @@ namespace NameHelper
         public string Process(IEnumerable<string> args)
         {
             if (args == null) throw new ArgumentNullException(nameof(args));
-            var textInfo = CultureInfo.CurrentCulture.TextInfo;
-            var tiled = args.Select(_ => textInfo.ToTitleCase(_.ToLower()));
             return string.Join(Environment.NewLine,
-                tiled.Select(_applyRules));
+                args.Select(Format));
+        }
+
+        public string Format(string name)
+        {
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            return _applyRules(_textInfo.ToTitleCase(name.ToLower()));
         }
     }
 }

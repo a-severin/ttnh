@@ -14,7 +14,10 @@ namespace NameHelper
             var assemblyLocation = GetType().Assembly.Location;
             var folder = Path.GetDirectoryName(assemblyLocation);
             var configPath = Path.Combine(folder, "RuleConfig.xml");
-            if (!File.Exists(configPath)) return Enumerable.Empty<XElement>();
+            if (!File.Exists(configPath))
+            {
+                return Enumerable.Empty<XElement>();
+            }
 
             var xConfig = XDocument.Load(configPath);
             return xConfig.Descendants("Rule");

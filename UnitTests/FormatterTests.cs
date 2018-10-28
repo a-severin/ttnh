@@ -34,5 +34,13 @@ namespace UnitTests
             Assert.AreEqual(args.Length,
                 result.Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Length);
         }
+
+        [TestMethod]
+        public void Format_TileName_OnCall()
+        {
+            var result = new Formatter(new List<IFormatRule>()).Format("seVERin anAtoliy");
+            Assert.AreEqual("Severin Anatoliy", result);
+
+        }
     }
 }
