@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="FormatRulesLoader.cs" />
     <Compile Include="Formatter.cs" />
+    <Compile Include="IConfigInitializer.cs" />
     <Compile Include="IFormatRule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
