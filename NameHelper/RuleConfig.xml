@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Rules>
+  <Rule Type="PrefixFormatRule">
+    <Prefix>Mc</Prefix>
+  </Rule>
+  <Rule Type="PrefixFormatRule">
+    <Prefix>De</Prefix>
+  </Rule>
+  <Rule Type="PrefixFormatRule">
+    <Prefix>von</Prefix>
+  </Rule>
+</Rules>

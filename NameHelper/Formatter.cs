@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace NameHelper
+{
+    public class Formatter
+    {
+        private readonly IReadOnlyCollection<IFormatRule> _rules;
+
+        public Formatter(IReadOnlyCollection<IFormatRule> rules)
+        {
+            _rules = rules ?? throw new ArgumentNullException(nameof(rules));
+        }
+
+        private string _applyRules(string arg)
+        {
+            var result = arg;
+            foreach (var rule in _rules)
+            {
+                result = rule.Apply(result);
+            }
+
+            return result;
+        }
+
+        public string Process(IEnumerable<string> args)
+        {
+            if (args == null) throw new ArgumentNullException(nameof(args));
+            var textInfo = CultureInfo.CurrentCulture.TextInfo;
+            var tiled = args.Select(_ => textInfo.ToTitleCase(_.ToLower()));
+            return string.Join(Environment.NewLine,
+                tiled.Select(_applyRules));
+        }
+    }
+}
